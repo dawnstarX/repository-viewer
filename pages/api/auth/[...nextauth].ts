@@ -12,7 +12,7 @@ export const authOptions = {
         
             clientId: process.env.GITHUB_ID,
             clientSecret: process.env.GITHUB_SECRET,
-            callbackUrl: "http://localhost:3000/api/auth/callback/github",
+          callbackUrl: "http://localhost:3000/api/auth/callback/github",
     }),
     // ...add more providers here
     
@@ -27,6 +27,7 @@ export const authOptions = {
     },
     async session({ session, token, user }) {
       // Send properties to the client, like an access_token from a provider.
+      
       session.accessToken = token.accessToken
       return session
     }

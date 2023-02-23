@@ -6,16 +6,18 @@ import AccessToken from "../components/accessToken"
 import { useSession, signIn, signOut } from "next-auth/react";
 
 
+
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default  function Home () {
   const { data: session } = useSession();
   if (session) {
     return (
       <>
-        Signed in as {session.user.email} <br />
+        Signed in as {session.user.name} <br />
         <button onClick={() => signOut()}>Sign out</button>
         <AccessToken />
+        
       </>
     );
   }
