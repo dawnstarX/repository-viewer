@@ -2,7 +2,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
-import Loginbutton from "../components/login-btn"
+import AccessToken from "../components/accessToken"
 import { useSession, signIn, signOut } from "next-auth/react";
 
 
@@ -15,6 +15,7 @@ export default function Home() {
       <>
         Signed in as {session.user.email} <br />
         <button onClick={() => signOut()}>Sign out</button>
+        <AccessToken />
       </>
     );
   }
@@ -22,6 +23,7 @@ export default function Home() {
     <>
       Not signed in <br />
       <button onClick={() => signIn()}>Sign in</button>
+
     </>
   );
   
