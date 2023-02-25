@@ -1,6 +1,6 @@
 import React, { FormEvent, useRef } from 'react'
 import { useSession } from 'next-auth/react';
-import {createRepo} from "../../../helper/fetchdata"
+import {createRepo} from "../../../helper/createRepo"
 
 const Index = () => {
     const nameRef = useRef(null);
@@ -9,9 +9,7 @@ const Index = () => {
     const { data: session } = useSession();
     //@ts-ignore
     const token = session?.accessToken;
-    console.log(token);
-    
-
+  
   function handleSubmit(event :FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
@@ -21,7 +19,7 @@ const Index = () => {
       createRepo(token, name, description, visibility)  .then((response) => {
         console.log(response);
       })
-      .catch((error) => {
+      .catch((error:string) => {
         console.error(error);
       });
     }

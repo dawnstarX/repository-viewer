@@ -1,7 +1,7 @@
 import React from 'react'
 import { GetServerSidePropsContext } from "next";
 import { getSession } from 'next-auth/react';
-import { repoInfo } from '@/helper/fetchdata';
+import { repoInfo } from '@/helper/repoInfo';
 import DetailsRepo from '@/components/DetailsRepo';
 
 type RepoData = {
@@ -9,6 +9,7 @@ type RepoData = {
     }
   
 export type repo = {
+    id:string
     name: string;
             description: string | null;
             createdAt: string;

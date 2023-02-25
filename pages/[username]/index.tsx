@@ -3,7 +3,8 @@ import { useSession, signOut,getSession} from "next-auth/react";
 import { useRouter } from 'next/router';
 import React from 'react'
 import RootRedirect from '@/components/rootRedirect';
-import { getGitHubUsername, getRepo } from "@/helper/fetchdata";
+import { getGitHubUsername } from "@/helper/getUsername";
+import {getRepo}  from "@/helper/getRepo"
 import { GetServerSidePropsContext } from "next";
 import Repository from "@/components/Repository";
 import Link from "next/link";

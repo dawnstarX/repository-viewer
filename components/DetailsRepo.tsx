@@ -1,23 +1,25 @@
 import { repo } from '@/pages/[username]/[repository]';
-import { deleteRepo } from '@/helper/fetchdata';
-import React from 'react'
+import { deleteRepo } from '@/helper/deleteRepo';
+import {updateRepo } from "../helper/updateRepo"
+import React, { FormEvent, useRef } from 'react'
 import { useSession } from 'next-auth/react';
 
 type repoProps = {
     props:repo
     }
 
-
-
-  
 const DetailsRepo = ({ props }: repoProps) => {
 
   const { data: session } = useSession();
     //@ts-ignore
   const token = session?.accessToken;
   const username = props.owner.login;
+  const ID = props.id;
 
-  function handleClick() {
+  const newNameRef = useRef(null);
+  const newDescRef = useRef(null);
+
+  function deleteHandler() {
     deleteRepo(username,props.name,token).then(() => {
       console.log('Repository deleted successfully!');
     })
@@ -25,9 +27,26 @@ const DetailsRepo = ({ props }: repoProps) => {
       console.error('Failed to delete repository:', error);
     });
   }
+
+  function updateHandler(event:FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.target as HTMLFormElement;
+    const newName = form.Name.value;
+    const newDescription = form.description.value;
+
+    
+
+    updateRepo(newName,newDescription,ID,token).then(() => {
+      console.log('Repository updated successfully!');
+    })
+    .catch(error => {
+      console.error('Failed to update repository:', error);
+    });
+  }
   
   return (
     <div><h1>{props.name}</h1>
+      <p>{ID }</p>
       <p>{props.owner.login}</p>
     <p>{props.description}</p>
     <p>{props.createdAt}</p>
@@ -42,8 +61,32 @@ const DetailsRepo = ({ props }: repoProps) => {
     <p>{props.licenseInfo?.name}</p>
       <p>{props.licenseInfo?.nickname}</p>
       
-      <button>update</button>
-      <button onClick={handleClick}>delete</button>
+      <form onSubmit={(event) => { updateHandler(event) }}>
+      <label htmlFor="name">Name:</label>
+    <textarea
+      id="name"
+    name="Name"
+      ref={newNameRef}
+      required
+          />
+          <br />
+
+    <label htmlFor="description">Description:</label>
+    <textarea
+      id="description"
+      name="description"
+      ref={newDescRef}
+      required
+          ></textarea>
+           <br />
+
+      <button type="submit">Update Repo</button>
+      </form>
+      
+      <br />
+      <br />
+      <br />
+      <button onClick={deleteHandler}>delete</button>
       </div>
   )
 }
