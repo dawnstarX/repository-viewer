@@ -13,6 +13,12 @@ export const authOptions = {
             clientId: process.env.GITHUB_ID,
             clientSecret: process.env.GITHUB_SECRET,
           callbackUrl: "http://localhost:3000/api/auth/callback/github",
+          authorization: {
+            params: {
+              // I wish to request additional permission scopes.
+              scope: 'repo read:user user:email',
+            },
+          },
     }),
     // ...add more providers here
     

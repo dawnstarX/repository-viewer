@@ -1,35 +1,9 @@
-import { RepoData } from '@/pages/[username]/[repository]';
+import { repo } from '@/pages/[username]/[repository]';
 import React from 'react'
 
 type repoProps = {
-    props:
-    {
-    name: string;
-    description: string | null;
-    createdAt: string;
-    updatedAt: string;
-    pushedAt: string;
-    isPrivate: boolean;
-    url: string;
-    primaryLanguage: {
-        name: string;
-    } | null;
-    stargazers: {
-        totalCount: number;
-    };
-    watchers: {
-        totalCount: number;
-    };
-    forks: {
-        totalCount: number;
-    };
-    licenseInfo: {
-        name: string;
-        nickname: string | null;
-    } | null;
-}
-        
-}
+    props:repo
+    }
 
 
 
