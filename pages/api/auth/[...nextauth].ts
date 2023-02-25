@@ -15,8 +15,7 @@ export const authOptions = {
           callbackUrl: "http://localhost:3000/api/auth/callback/github",
           authorization: {
             params: {
-              // I wish to request additional permission scopes.
-              scope: 'repo read:user user:email',
+              scope: 'repo read:user user:email delete_repo',
             },
           },
     }),

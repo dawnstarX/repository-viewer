@@ -31,7 +31,10 @@ export type repo = {
             licenseInfo: {
                 name: string;
                 nickname: string | null;
-            } | null;
+    } | null;
+    owner: {
+        login: string;
+            }
 }
   
 const index = ({ RepoDetails }:RepoData) => {

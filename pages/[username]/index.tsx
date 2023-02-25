@@ -6,6 +6,7 @@ import RootRedirect from '@/components/rootRedirect';
 import { getGitHubUsername, getRepo } from "@/helper/fetchdata";
 import { GetServerSidePropsContext } from "next";
 import Repository from "@/components/Repository";
+import Link from "next/link";
 
 type repositories={
     repositories:repository[]
@@ -19,14 +20,16 @@ export type repository={
 
 
 const Index = (repositories : repositories) => {
-    const { data: session } = useSession();
+  const { data: session } = useSession();
+  const router = useRouter();
     const user = session?.user
     const name=user?.name
     if (session) {
         return (
             <>
                 <h2>Welcome { name}</h2>
-                <button onClick={() => signOut()}>Sign out</button>
+            <button onClick={() => signOut()}>Sign out</button>
+           <Link href={`${router.asPath}/new`}><button>Create New Repo</button></Link> 
                 
                 {
                     repositories.repositories.map((repo) => {

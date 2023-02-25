@@ -10,7 +10,7 @@ type Props = {
 const Repository = ({ repo }: Props) => {
   const router = useRouter();
   const handleButtonClick = () => {
-    // Append '/repo' to the current URL
+    
     router.push(`${router.asPath}/${repo.name}`);
   };
     return (
