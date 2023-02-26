@@ -57,3 +57,4 @@ export type detailedRepo = {
         login: string;
             }
 }
+
