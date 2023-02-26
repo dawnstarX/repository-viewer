@@ -7,6 +7,9 @@ export async function getRepo(username:string,accessToken:string){
                       name
                       description
                       url
+                      createdAt
+                      updatedAt
+                      isPrivate
                     }
                   }
                 }

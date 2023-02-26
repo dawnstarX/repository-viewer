@@ -3,12 +3,20 @@ import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/react';
 import { searchRepo } from '@/helper/searchRepo';
 import { GetServerSidePropsContext } from "next";
+import {filteredRepo} from "@/Types/types"
+import Repository from '@/components/Repository';
 
-const Index = ({response}) => {
-  console.log(response);
+
+const Index = ({filteredRepo}: filteredRepo) => {
+
   return (
     <div>
-      <></>
+      {
+        filteredRepo.map((nodeRepo) => {
+          const repo = nodeRepo.node;
+          return <Repository repo={repo} key={repo.name}  />
+        })
+      }
       
     </div>
   )
@@ -23,12 +31,9 @@ export async function getServerSideProps(context:GetServerSidePropsContext | und
   const q  = context?.query?.q;
   const username = context?.params?.username ?? '';
   const response = await searchRepo(username as string, q as string, token);
-
-  
-  
-  
+  const filteredRepo = response.data.search.edges;
   return {
-      props: { response },
+      props: { filteredRepo },
     };
 
 }

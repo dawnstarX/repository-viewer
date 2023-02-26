@@ -3,42 +3,10 @@ import { GetServerSidePropsContext } from "next";
 import { getSession } from 'next-auth/react';
 import { repoInfo } from '@/helper/repoInfo';
 import DetailsRepo from '@/components/DetailsRepo';
+import { RepoData } from '@/Types/types';
 
-type RepoData = {
-    RepoDetails: repo
-    }
   
-export type repo = {
-    id:string
-    name: string;
-            description: string | null;
-            createdAt: string;
-            updatedAt: string;
-            pushedAt: string;
-            isPrivate: boolean;
-            url: string;
-            primaryLanguage: {
-                name: string;
-            } | null;
-            stargazers: {
-                totalCount: number;
-            };
-            watchers: {
-                totalCount: number;
-            };
-            forks: {
-                totalCount: number;
-            };
-            licenseInfo: {
-                name: string;
-                nickname: string | null;
-    } | null;
-    owner: {
-        login: string;
-            }
-}
-  
-const index = ({ RepoDetails }:RepoData) => {
+const Index = ({ RepoDetails }:RepoData) => {
     return (
         <> <div> <DetailsRepo props={RepoDetails} />
       </div></>
@@ -46,7 +14,7 @@ const index = ({ RepoDetails }:RepoData) => {
   )
 }
 
-export default index
+export default Index
 
 
 export async function getServerSideProps(context:GetServerSidePropsContext | undefined) {

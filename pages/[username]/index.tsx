@@ -1,4 +1,3 @@
-
 import { useSession, signOut,getSession} from "next-auth/react";
 import { useRouter } from 'next/router';
 import React, { FormEvent, useRef } from 'react'
@@ -8,21 +7,12 @@ import {getRepo}  from "@/helper/getRepo"
 import { GetServerSidePropsContext } from "next";
 import Repository from "@/components/Repository";
 import Link from "next/link";
-
-type repositories={
-    repositories:repository[]
-}
-export type repository={
-    name: string,
-    description: string,
-    url:string
-}
-
+import { repositories,repository } from "@/Types/types";
 
 
 const Index = (repositories : repositories) => {
-    const { data: session } = useSession();
-    const router = useRouter();
+  const { data: session } = useSession();
+  const router = useRouter();
   const user = session?.user;
   const name = user?.name;
   const searchTermRef = useRef<HTMLTextAreaElement>(null);

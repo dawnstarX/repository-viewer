@@ -1,14 +1,12 @@
-import { repo } from '@/pages/[username]/[repository]';
+import {detailedrepoProps} from "@/Types/types"
 import { deleteRepo } from '@/helper/deleteRepo';
 import {updateRepo } from "../helper/updateRepo"
 import React, { FormEvent, useRef } from 'react'
 import { useSession } from 'next-auth/react';
 
-type repoProps = {
-    props:repo
-    }
 
-const DetailsRepo = ({ props }: repoProps) => {
+
+const DetailsRepo = ({ props }: detailedrepoProps) => {
 
   const { data: session } = useSession();
     //@ts-ignore
