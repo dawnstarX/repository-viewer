@@ -13,8 +13,8 @@ const Index = () => {
   function handleSubmit(event :FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
-  const name = form.Name.value;
-  const description = form.description.value;
+    const name = form.Name.value;
+    const description = form.description.value;
       const visibility = form.visibility.value;
       createRepo(token, name, description, visibility)  .then((response) => {
         console.log(response);
