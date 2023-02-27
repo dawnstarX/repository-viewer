@@ -6,7 +6,7 @@ import { GetServerSidePropsContext } from "next";
 import {filteredRepo} from "@/Types/types"
 import Repository from '@/components/Repository';
 import FilterRepo from '@/components/FilterRepo';
-import { filterRepos } from "../../../helper/filterRepo";
+import { filteringRepos } from "../../../helper/filterRepo";
 
 
 const Index = ({filteredRepo}: filteredRepo) => {
@@ -34,20 +34,14 @@ export async function getServerSideProps(context:GetServerSidePropsContext | und
   const q = context?.query?.q;
   const username = context?.params?.username ?? '';
   const language = context?.query?.language;
-  const sortField = context?.query?.sortField;
-  const sortOrder = context?.query?.sortOrder;
+  const sortField = context?.query?.sortField ?? '';
+  const sortOrder = context?.query?.sortOrder ?? '';
   
-  var response;
-  if (language || sortField || sortOrder) {
     
-     response = await filterRepos(username as string, q as string, language as string, sortField as string, sortOrder as string, token);
-  }
-  else {
-    response = await searchRepo(username as string, q as string, token);
- }
- 
+  const response = await filteringRepos(username as string,q as string,token,language as string,sortField as string,sortOrder as string);
   
   const filteredRepo = response.data.search.edges;
+  
   return {
       props: { filteredRepo },
     };

@@ -47,13 +47,13 @@ const FilterRepo = () => {
       <label>
         Sort by:
         <select name="sortField" ref={sortFieldRef}>
-          <option value="">None</option>
+          <option value="none">None</option>
           <option value="name">Name</option>
           <option value="created_at">Date created</option>
           <option value="updated_at">Date updated</option>
         </select>
         <select name="sortOrder" ref={sortOrderRef}>
-          <option value="">None</option>
+          <option value="none">None</option>
           <option value="asc">Ascending</option>
           <option value="desc">Descending</option>
         </select>

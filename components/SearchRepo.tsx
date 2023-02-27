@@ -8,10 +8,16 @@ const SearchRepo = () => {
   const searchTermRef = useRef<HTMLTextAreaElement>(null);
     const handleSearch = (event:FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const searchTerm = searchTermRef.current?.value;
+      const searchTerm = searchTermRef.current?.value;
+      const queryParams = {
+        q:searchTerm,
+        language:  "any",
+        sortField:  "name",
+        sortOrder:  "asc",
+      };
         router.push({
           pathname: `${router.asPath}/search`,
-          query: { q: searchTerm },
+          query: queryParams,
         })
         }
     
