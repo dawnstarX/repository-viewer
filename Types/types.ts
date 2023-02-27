@@ -4,7 +4,7 @@ export type repository={
     url: string,
     createdAt:string,
     updatedAt: string,
-    isPrivate:boolean
+    isPrivate: boolean,
 }
 
 export type repositories={
