@@ -1,36 +1,35 @@
-import { useSession, signOut,getSession} from "next-auth/react";
+import { useSession,getSession} from "next-auth/react";
 import { useRouter } from 'next/router';
-import React, { FormEvent, useRef } from 'react'
 import RootRedirect from '@/components/rootRedirect';
-import { getGitHubUsername } from "@/helper/getUsername";
 import {getRepo}  from "@/helper/getRepo"
 import { GetServerSidePropsContext } from "next";
 import Repository from "@/components/Repository";
-import Link from "next/link";
 import { repositories } from "@/Types/types";
 import SearchRepo from "@/components/SearchRepo";
+import UserDetails from "@/components/UserDetails";
+
+
 
 
 const Index = (repositories : repositories) => {
   const { data: session } = useSession();
   const router = useRouter();
-  const user = session?.user;
-  const name = user?.name;
 
     if (session) {
         return (
             <>
-                <h2>Welcome { name}</h2>
-            <button onClick={() => signOut()}>Sign out</button>
-            <Link href={`${router.asPath}/new`}><button>Create New Repo</button></Link> 
-            <br />
-            <br />
-            <SearchRepo />
-                {
-                    repositories.repositories.map((repo) => {
-                        return <Repository repo={repo} key={repo.name}  />
-                   })
-                }
+            <div className="flex flex-row h-screen">
+              <UserDetails />
+  
+  <div className="w-3/4 p-4">
+    <SearchRepo />
+    <div className="grid grid-cols-2 gap-4">
+      {repositories.repositories.map((repo) => {
+        return <Repository repo={repo} key={repo.name} />;
+      })}
+    </div>
+  </div>
+</div>
           </>
         );
       }

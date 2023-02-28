@@ -23,20 +23,21 @@ const SearchRepo = () => {
     
 
   return (
-    <div> <form onSubmit={(event) => { handleSearch(event)}} style={{ display: 'flex', alignItems: 'center' }}>
+    <div>
+  <form onSubmit={(event) => { handleSearch(event) }} className="relative">
     <textarea
-    id="name"
-    name="search"
-    ref={searchTermRef}
-    style={{ width: '40%', marginRight: '1rem' }}
-    />
+      id="name"
+      name="search"
+      ref={searchTermRef}
+      placeholder="Search repositories"
+      className="border border-gray-400 px-4 py-2 mb-4 w-full bg-transparent rounded-lg placeholder-white placeholder-opacity-75 text-white  h-16 flex items-center"
+      style={{resize: "none"}} />
+          
+          <button type="submit" className="text-white absolute right-2.5 bottom-2.5 bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  font-bold px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+    
+  </form>
+</div>
 
-      <button type="submit" style={{ background: 'transparent', border: 'none' }}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-          <path d="M15.708 13.292l-3.61-3.61A6.47 6.47 0 0014 6.5 6.5 6.5 0 107.5 13a6.47 6.47 0 004.182-1.528l3.61 3.61a.5.5 0 00.708-.708zM7.5 12A5.5 5.5 0 112 6.5 5.5 5.5 0 017.5 12z"/>
-        </svg>
-      </button>
-    </form></div>
   )
 }
 
