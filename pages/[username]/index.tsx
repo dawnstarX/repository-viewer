@@ -18,12 +18,15 @@ const Index = (repositories : repositories) => {
     if (session) {
         return (
             <>
-            <div className="flex flex-row h-screen">
+            <div className="flex flex-col md:flex-row h-screen">
               <UserDetails />
   
-  <div className="w-3/4 p-4">
-    <SearchRepo />
-    <div className="grid grid-cols-2 gap-4">
+              <div className="w-full md:w-3/4 p-4">
+    <div className="w-full">
+      <SearchRepo />
+    </div>
+
+    <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
       {repositories.repositories.map((repo) => {
         return <Repository repo={repo} key={repo.name} />;
       })}
