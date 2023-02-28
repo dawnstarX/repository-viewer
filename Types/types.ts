@@ -58,3 +58,13 @@ export type detailedRepo = {
             }
 }
 
+export interface updateModalProps {
+    onClose: () => void;
+    id:string
+}
+export interface deleteModalProps {
+    onClose: () => void;
+    username:string,
+    id:string
+  }
+

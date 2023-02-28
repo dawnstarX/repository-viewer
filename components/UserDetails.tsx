@@ -13,8 +13,8 @@ const UserDetails = () => {
     const name = user?.name;
   return (
     <div className="w-full md:w-1/4 p-4 flex flex-col items-center justify-center">
-    <div className="w-1/2 md:w-full h-auto">
-      <Image src={avatar!} alt="user avatar" width={250} height={250} className="rounded-full mb-4" />
+    <div className="w-1/2 md:w-full h-auto  ">
+      <Image src={avatar!} alt="user avatar" width={250} height={250} className="rounded-full mb-4 md:ml-10" />
     </div>
 
     <h1 className="text-lg font-bold mb-1 text-white">{name}</h1>
