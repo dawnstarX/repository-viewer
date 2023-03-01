@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react';
 import React, { useState } from 'react'
 import {deleteModalProps} from "../Types/types"
 
-const DeleteModal = ({ onClose,username, id }: deleteModalProps) => {
+const DeleteModal = ({ onClose,username, repoName }: deleteModalProps) => {
     const [showModal, setShowModal] = useState(true);
     const { data: session } = useSession();
       //@ts-ignore
@@ -13,8 +13,7 @@ const DeleteModal = ({ onClose,username, id }: deleteModalProps) => {
       onClose();
     };
     function deleteHandler() {
-        console.log(username, id, token);
-        deleteRepo(username,id,token).then(() => {
+        deleteRepo(username,repoName,token).then(() => {
           console.log('Repository deleted successfully!');
         })
         .catch(error => {

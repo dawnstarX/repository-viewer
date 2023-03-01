@@ -26,9 +26,7 @@ const DetailsRepo = ({ props }: detailedrepoProps) => {
   const token = session?.accessToken;
   const username = props.owner.login;
   const ID = props.id;
-
-
-
+  const repoName = props.name;
 
   function deleteHandler() {
     deleteRepo(username, props.name, token).then(() => {
@@ -104,7 +102,7 @@ const DetailsRepo = ({ props }: detailedrepoProps) => {
           {showModal && <UpdateModal onClose={handleModalClose} id={ID} />}
         </div>
         <div>
-          {dangerModel && <DeleteModal onClose={dangerModalClose} username={username } id={ID} />}
+          {dangerModel && <DeleteModal onClose={dangerModalClose} username={username } repoName={repo.name} />}
         </div>
 
       </div>

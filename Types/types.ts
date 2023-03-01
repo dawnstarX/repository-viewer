@@ -65,6 +65,6 @@ export interface updateModalProps {
 export interface deleteModalProps {
     onClose: () => void;
     username:string,
-    id:string
+    repoName:string
   }
 

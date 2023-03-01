@@ -13,63 +13,79 @@ const Index = () => {
   function handleSubmit(event :FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
+   
     const name = form.Name.value;
     const description = form.description.value;
       const visibility = form.visibility.value;
-      createRepo(token, name, description, visibility)  .then((response) => {
+      createRepo(token, name, description, visibility).then((response) => {
         console.log(response);
       })
       .catch((error:string) => {
         console.error(error);
       });
-    }
+
+    form.reset();
+  }
+
+  
+  function handleClearForm(event: FormEvent<HTMLFormElement>) {
+    const form = event.target as HTMLFormElement;
+    form.reset();
+  }
     
   return (
-    <div><form onSubmit={(event)=>{handleSubmit(event)}}>
-    <label htmlFor="name">Name:</label>
-    <textarea
-      id="name"
+    <div className="flex justify-center items-center h-screen bg-transparent">
+    <div className="border-2 border-white  bg-transparent p-8 rounded-lg shadow-lg">
+      <h1 className="text-2xl font-bold mb-4 text-white">Create New Repository</h1>
+      <form onSubmit={(event) => { handleSubmit(event) }}>
+  <label htmlFor="name" className="text-white">Name:</label>
+  <textarea
+    id="name"
     name="Name"
-      ref={nameRef}
+    required
+    className="w-full rounded-lg py-2 px-4 mb-4 text-white bg-transparent border-2 border-white mt-4"
+  />
+  <label htmlFor="description" className="text-white mb-4">Description:</label>
+  <textarea
+    id="description"
+    name="description"
+    ref={descRef}
+    required
+    className="w-full rounded-lg py-2 px-4 mb-4 text-white bg-transparent border-2 border-white mt-4"
+  />
+  <label className="text-white">Visibility:</label>
+  <div className="mt-4">
+    <input
+      type="radio"
+      id="public"
+      name="visibility"
+      value="public"
       required
-          />
-          <br />
-
-    <label htmlFor="description">Description:</label>
-    <textarea
-      id="description"
-      name="description"
-      ref={descRef}
+    />
+    <label htmlFor="public" className="text-white">Public</label>
+  </div>
+  <div className="mt-4">
+    <input
+      type="radio"
+      id="private"
+      name="visibility"
+      value="private"
       required
-          ></textarea>
-           <br />
+    />
+    <label htmlFor="private" className="text-white">Private</label>
+          </div>
+          <div className=" mt-6 flex justify-between">
+  <button
+    type="submit" name="action" value="submit"
+    className="bg-blue-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-4">
+    Create repository
+  </button>
+</div>
+</form>
 
-    <label>Visibility:</label>
-    <div>
-      <input
-        type="radio"
-        id="public"
-        name="visibility"
-        value="public"
-        ref={visibilityRef}
-        required
-      />
-      <label htmlFor="public">Public</label>
     </div>
-    <div>
-      <input
-        type="radio"
-        id="private"
-        name="visibility"
-        value="private"
-        ref={visibilityRef}
-        required
-      />
-      <label htmlFor="private">Private</label>
-    </div>
-
-    <button type="submit">Create repository</button>
-  </form></div>
+  </div>
+  
   )
 }
 
