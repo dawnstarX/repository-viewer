@@ -27,7 +27,9 @@ const UserDetails = () => {
 
       <button
         className="hover:border-white hover:text-white border border-gray-400 text-gray-400 font-bold py-2 px-4 rounded md:ml-4"
-        onClick={() => signOut()}
+          onClick={() => signOut({
+            callbackUrl: "/"
+        })}
       >
         Sign out
       </button>

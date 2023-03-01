@@ -1,11 +1,15 @@
 import { deleteRepo } from '@/helper/deleteRepo';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {deleteModalProps} from "../Types/types"
 
 const DeleteModal = ({ onClose,username, repoName }: deleteModalProps) => {
     const [showModal, setShowModal] = useState(true);
-    const { data: session } = useSession();
+  const { data: session } = useSession();
+  const Router = useRouter();
       //@ts-ignore
     const token = session?.accessToken;
     const handleClose = () => {
@@ -14,12 +18,35 @@ const DeleteModal = ({ onClose,username, repoName }: deleteModalProps) => {
     };
     function deleteHandler() {
         deleteRepo(username,repoName,token).then(() => {
-          console.log('Repository deleted successfully!');
+          toast.success('Deleted Successfully!  Redirecting... ', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+          handleClose();
+          setTimeout(() => {
+            Router.back();
+          }, 2000);
         })
         .catch(error => {
-          console.error('Failed to delete repository:', error);
+          toast.error('Could not delete', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
+          handleClose();
         });
-        handleClose();
+        
       }
     
   return (
@@ -69,7 +96,8 @@ const DeleteModal = ({ onClose,username, repoName }: deleteModalProps) => {
         className="text-gray-400 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10"
       onClick={handleClose}>
         No, cancel
-      </button>
+          </button>
+          <ToastContainer />
     </div>
   </div>
 </div>

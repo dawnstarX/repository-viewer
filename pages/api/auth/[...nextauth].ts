@@ -1,6 +1,4 @@
 // @ts-nocheck
-
-
 import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 
@@ -12,7 +10,7 @@ export const authOptions = {
         
             clientId: process.env.GITHUB_ID,
             clientSecret: process.env.GITHUB_SECRET,
-          callbackUrl: "http://localhost:3000/api/auth/callback/github",
+          callbackUrl: `${process.env.NEXTAUTH_URL}/api/auth/callback/github`,
           authorization: {
             params: {
               scope: 'repo read:user user:email delete_repo',

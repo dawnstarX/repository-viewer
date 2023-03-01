@@ -1,12 +1,8 @@
 import React, { FormEvent, useRef } from 'react'
-//import { FilterOptions } from '@/Types/types';
+import { FilterOptions } from '@/Types/types';
 import router from 'next/router';
 
-export type FilterOptions= {
-  language?: string;
-  sortField?: string;
-  sortOrder?: string
-}
+
 
 const FilterRepo = () => {
 

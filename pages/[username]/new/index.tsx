@@ -1,12 +1,16 @@
 import React, { FormEvent, useRef } from 'react'
 import { useSession } from 'next-auth/react';
 import {createRepo} from "../../../helper/createRepo"
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/router';
 
 const Index = () => {
     const nameRef = useRef(null);
     const descRef = useRef(null);
     const visibilityRef = useRef(null);
-    const { data: session } = useSession();
+  const { data: session } = useSession();
+  const Router = useRouter();
     //@ts-ignore
     const token = session?.accessToken;
   
@@ -18,10 +22,31 @@ const Index = () => {
     const description = form.description.value;
       const visibility = form.visibility.value;
       createRepo(token, name, description, visibility).then((response) => {
-        console.log(response);
+        toast.success('Created Successfully!', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        setTimeout(() => {
+          Router.back();
+        }, 2000);
       })
       .catch((error:string) => {
-        console.error(error);
+        toast.error('Could not create', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
       });
 
     form.reset();
@@ -82,7 +107,7 @@ const Index = () => {
   </button>
 </div>
 </form>
-
+<ToastContainer />
     </div>
   </div>
   

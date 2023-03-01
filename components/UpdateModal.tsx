@@ -1,6 +1,9 @@
 import { updateRepo } from "@/helper/updateRepo";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import {updateModalProps} from "../Types/types"
 
 
@@ -8,6 +11,7 @@ import {updateModalProps} from "../Types/types"
 export default function Modal({ onClose ,id }: updateModalProps) {
   const [showModal, setShowModal] = useState(true);
   const { data: session } = useSession();
+  const Router = useRouter();
     //@ts-ignore
   const token = session?.accessToken;
   const handleClose = () => {
@@ -22,17 +26,43 @@ export default function Modal({ onClose ,id }: updateModalProps) {
       const newDescription = form.description.value;
       
       updateRepo(newName,newDescription,id,token).then(() => {
-        console.log('Repository updated successfully!');
+        toast.success('Updated Successfully!', {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        
+        handleClose();
+        setTimeout(() => {
+          Router.back();
+        }, 2000);
       })
       .catch(error => {
-        console.error('Failed to update repository:', error);
+        toast.error('Could not Update', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
+        handleClose();
       });
 
-      handleClose();
+      
       }
 
   return (
-    <div
+    <>
+
+     <div
       className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center"
       onClick={() => handleClose()}
       style={{ display: showModal ? "flex" : "none" }}
@@ -77,17 +107,23 @@ export default function Modal({ onClose ,id }: updateModalProps) {
         rows={3}
       />
     </div>
-    </div>
-                      <button 
+            </div>
+            <div>
+            <button 
             className="bg-white text-gray-700 px-4 py-2 rounded-md hover:bg-gray-200"
             type="submit"
-          >
-            Update
-          </button>
+            > Update
+              </button>
+              
+            </div>
+                      
+            
 </form>
-
+<ToastContainer />
         </div>
       </div>
-    </div>
+      </div>
+    </>
+   
   );
 }

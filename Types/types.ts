@@ -26,7 +26,13 @@ export type detailedrepoProps = {
 
 export type repoProps = {
     repo: repository;
-  };
+};
+  
+export type FilterOptions= {
+    language?: string;
+    sortField?: string;
+    sortOrder?: string
+  }
   
 export type detailedRepo = {
     id:string

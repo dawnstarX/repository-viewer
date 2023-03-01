@@ -15,7 +15,6 @@ const Index = (repositories : repositories) => {
   const { data: session } = useSession();
   const router = useRouter();
 
-    if (session) {
         return (
             <>
             <div className="flex flex-col md:flex-row h-screen">
@@ -36,27 +35,12 @@ const Index = (repositories : repositories) => {
           </>
         );
       }
-      return (
-        <>
-          <RootRedirect />
-    
-        </>
-      );
-}
+     
 
 export default Index
 
 export async function getServerSideProps(context: GetServerSidePropsContext | undefined) {
     const session = await getSession(context);
-    
-    if (!session) {
-            return {
-              redirect: {
-                destination: '/',
-                permanent: false,
-              },
-            };
-          }
     //@ts-ignore
     const token = session.accessToken;
     const username = context?.params?.username ?? '';
